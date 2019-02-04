@@ -1,5 +1,5 @@
 pragma solidity ^0.4.25;
-dfgdfgadsfasdfasdfsdf
+
 interface IERC20 {
     function totalSupply() external view returns (uint256);
 
@@ -97,8 +97,6 @@ library SafeMath {
     }
 }
 
-// destroy, batchTransfer (with bug), integerOverflow, function with no return
-
 contract ValidCoin is IERC20 {
     using SafeMath for uint256;
 
@@ -117,7 +115,7 @@ contract ValidCoin is IERC20 {
     }
 
     function balanceOf(address owner) public view returns (uint256) {
-        return _balances[owner];
+        //return _balances[owner];
     }
 
     function allowance(address owner, address spender) public view returns (uint256) {
@@ -138,7 +136,7 @@ contract ValidCoin is IERC20 {
     }
 
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
-		_allowed[from][msg.sender] = _allowed[from][msg.sender] - value;
+		_allowed[from][msg.sender] = _allowed[from][msg.sender].sub(value);
         _transfer(from, to, value);
         emit Approval(from, msg.sender, _allowed[from][msg.sender]);
         return true;
@@ -198,7 +196,7 @@ contract ValidCoin is IERC20 {
 
     function batchTransfer(address[] _receivers, uint256 _value) public returns (bool) {
 		uint cnt = _receivers.length;
-		uint256 amount = uint256(cnt) * _value;
+		uint256 amount = uint256(cnt).mul(_value);
 		require(cnt > 0 && cnt <= 20);
 		require(_value > 0 && _balances[msg.sender] >= amount);
 
