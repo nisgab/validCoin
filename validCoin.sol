@@ -111,11 +111,11 @@ contract ValidCoin is IERC20 {
     }
 
     function totalSupply() public view returns (uint256) {
-        //return _totalSupply;
+        return _totalSupply;
     }
 
     function balanceOf(address owner) public view returns (uint256) {
-        //return _balances[owner];
+        return _balances[owner];
     }
 
     function allowance(address owner, address spender) public view returns (uint256) {
